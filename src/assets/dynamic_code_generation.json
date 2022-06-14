@@ -1,0 +1,208 @@
+{
+	"LabelList": [
+		{
+			"Text": "First Name:",
+			"Location": {
+				"X": 20,
+				"Y": 20
+			},
+			"Font": {
+				"Name": "Arial",
+				"Size": 14
+			},
+			"Name": "firstNameLabel"
+		},
+		{
+			"Text": "Last Name:",
+			"Location": {
+				"X": 450,
+				"Y": 20
+			},
+			"Font": {
+				"Name": "Arial",
+				"Size": 14
+			},
+			"Name": "lastNameLabel"
+		},
+		{
+			"Text": "First Date:",
+			"Location": {
+				"X": 20,
+				"Y": 80
+			},
+			"Font": {
+				"Name": "Arial",
+				"Size": 14
+			},
+			"Name": "firstDateLabel"
+		},
+		{
+			"Text": "Second Date:",
+			"Location": {
+				"X": 431,
+				"Y": 80
+			},
+			"Font": {
+				"Name": "Arial",
+				"Size": 14
+			},
+			"Name": "secondDateLabel"
+		},
+		{
+			"Text": "Favourite Color:",
+			"Location": {
+				"X": 20,
+				"Y": 140
+			},
+			"Font": {
+				"Name": "Arial",
+				"Size": 14
+			},
+			"Name": "favouriteColorLabel"
+		},
+		{
+			"Text": "Favourite Vehicle:",
+			"Location": {
+				"X": 433,
+				"Y": 140
+			},
+			"Font": {
+				"Name": "Arial",
+				"Size": 14
+			},
+			"Name": "favouriteVehicleLabel"
+		}
+	],
+	"TextBoxList": [
+		{
+			"Size": {
+				"Width": 200,
+				"Height": 23
+			},
+			"Location": {
+				"X": 135,
+				"Y": 18
+			},
+			"Font": {
+				"Name": "Arial",
+				"Size": 14
+			},
+			"Name": "textBox1"
+		},
+		{
+			"Size": {
+				"Width": 200,
+				"Height": 23
+			},
+			"Location": {
+				"X": 565,
+				"Y": 18
+			},
+			"Font": {
+				"Name": "Arial",
+				"Size": 14
+			},
+			"Name": "textBox2"
+		}
+	],
+	"DateTimePickerList": [
+		{
+			"Size": {
+				"Width": 200,
+				"Height": 23
+			},
+			"Location": {
+				"X": 135,
+				"Y": 78
+			},
+			"Font": {
+				"Name": "Arial",
+				"Size": 14
+			},
+			"Name": "dateTime1"
+		},
+		{
+			"Size": {
+				"Width": 200,
+				"Height": 23
+			},
+			"Location": {
+				"X": 565,
+				"Y": 78
+			},
+			"Font": {
+				"Name": "Arial",
+				"Size": 14
+			},
+			"Name": "dateTime2"
+		}
+	],
+	"ComboBoxStringList": [
+		{
+			"DataSource": [ "Red", "Blue", "Green", "Black", "Orange", "Yellow" ],
+			"Size": {
+				"Width": 160,
+				"Height": 23
+			},
+			"Location": {
+				"X": 175,
+				"Y": 138
+			},
+			"Font": {
+				"Name": "Arial",
+				"Size": 14
+			},
+			"Name": "comboBox1"
+		},
+		{
+			"DataSource": [ "Car", "Boat", "Plane", "Motorbike", "Bicycle" ],
+			"Size": {
+				"Width": 160,
+				"Height": 23
+			},
+			"Location": {
+				"X": 606,
+				"Y": 138
+			},
+			"Font": {
+				"Name": "Arial",
+				"Size": 14
+			},
+			"Name": "comboBox2"
+		}
+	],
+	"ButtonList": [
+		{
+			"Text": "1",
+			"Size": {
+				"Width": 70,
+				"Height": 50
+			},
+			"Location": {
+				"X": 590,
+				"Y": 380
+			},
+			"Font": {
+				"Name": "Arial",
+				"Size": 14
+			},
+			"Name": "buttonOne"
+		},
+		{
+			"Text": "2",
+			"Size": {
+				"Width": 70,
+				"Height": 50
+			},
+			"Location": {
+				"X": 690,
+				"Y": 380
+			},
+			"Font": {
+				"Name": "Arial",
+				"Size": 14
+			},
+			"Name": "buttonTwo"
+		}
+	]
+}
