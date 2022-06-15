@@ -21,7 +21,7 @@ function createAnArrayOfIndividualControlObjects(dynamicCodeGeneration){
 
  /**
   * Create the rows our application needs based on an Array of controls.
-  * @param {Array} arrayOfIndividualControlObjects – Array harbouring all of the objects manifesting each control respectively, originally from the JSON file, now ordered from smallest to largest.
+  * @param {Array} arrayOfIndividualControlObjects – Array harbouring all of the objects manifesting each control respectively, originally from the JSON file, now ordered from closest to the top of the GUI to the ones furthest down on it: an order the row creation GUI that we are using here requires.
   * @returns {Array} – Array of objects with each object representing all the rows of our React GUI.
   */
  function createRowsForPositionObject(arrayOfIndividualControlObjects){
@@ -48,15 +48,15 @@ function createAnArrayOfIndividualControlObjects(dynamicCodeGeneration){
  }
 
  /**
-  * Take the original rows array, as supplied by the 'createRowsForPositionObject' function, and modify it so that the margin that each, individual, control within a row needs to have for it to be properly spaced out from its proceeding element, whilst staying true to the layout as stipulated by the original JSON file, can be ascertained from this Array.
+  * Take the original rows array, as supplied by the 'createRowsForPositionObject' function, and modify it to calculate the margin that each, individual, control within a row needs to have for it to be properly spaced out from its proceeding element, whilst staying true to the layout as stipulated by the original JSON file, can be ascertained from this Array.
   * @param {Array} positionObjects – Array of rows, each of which containing objects manifesting controls as derived from the original JSON file, aka., the Array straight out of the 'createRowsForPositionObject' function.
-  * @returns {Array} – Modified Array of rows, i.e., the Array this function was supplied with, with each of its rows now having an extra 'rowLeft' property representing the spacing, on the X axis, that each of its rows should be from each other at full screen size, ordered from small to large.
+  * @returns {Array} – Modified Array of rows, i.e., the Array this function was supplied with, with each of its rows now having an extra 'rowLeft' property representing the spacing, on the X axis, that each of its rows should be from each other at full screen size, ordered from the left of the row to the right of the row.
   */
  function calculateSpacingOfControlsWithinSameRow(positionObjects){
     positionObjects.forEach(row => {
         const rowControlsInOrder = sortAnArrayOfControlsOnLocationEitherXOrY(row['controls'], 'X');
         let startingXPosition = rowControlsInOrder[0]['Location']['X']; let startingWidth = workOutWidthFromControlObject(rowControlsInOrder[0]);
-        row['rowLeft'] = [0];
+        row['rowLeft'] = [startingXPosition];
         rowControlsInOrder.slice(1).forEach(control => {
             row['rowLeft'].push(control['Location']['X'] - (startingXPosition + startingWidth));
             startingXPosition = control['Location']['X']; startingWidth = workOutWidthFromControlObject(control);

@@ -1,16 +1,24 @@
 import React from 'react';
 
-function Label({control}){
+function getLabelWidth(control){
+    let returnWidth = '';
+    if(control.Size){
+        if(control.Size.Width) returnWidth = control.Size.Width+'px';
+    }
+    return returnWidth;
+}
+
+function Label({control, marginLeft}){
 
     const labelStyles = {
         fontFamily: control.Font.Name,
-
+        fontSize: control.Font.Size+'px',
+        marginLeft: marginLeft+'px',
+        width: getLabelWidth(control),
     };
 
     return(
-        <h1>
-            This is a label
-        </h1>
+        <label style={labelStyles}>{control.Text}</label>
     )
 }
 

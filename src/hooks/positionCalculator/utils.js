@@ -3,6 +3,11 @@
  * @type {number}
  */
 const beginANewRowSizeLeeway = 5;
+/**
+ * The default width of a control providing that it has not come with a width of its own discretion. Very common for 'label' controls.
+ * @type {number}
+ */
+const defaultControlWidth = 100;
 
 /**
  * Returns an array harbouring, from small to high, the current y positions of each control.
@@ -61,7 +66,7 @@ function sortAnArrayOfControlsOnLocationEitherXOrY(arrayOfIndividualControlObjec
  * @returns {number} – The width from the control supplied providing that it can be ascertained, if not, then simply use 100: the default that windows forms uses for controls that do not have explicit widths set.
  */
 function workOutWidthFromControlObject(controlObj){
-    if(!controlObj['Size']) return 100;
+    if(!controlObj['Size']) return defaultControlWidth;
     let width = controlObj['Size']['Width'];
     return width;
 }
