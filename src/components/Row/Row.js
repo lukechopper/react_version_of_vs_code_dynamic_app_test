@@ -6,24 +6,28 @@ import DateTimePicker from '../Controls/DateTimePicker/DateTimePicker';
 import ComboBoxString from '../Controls/ComboBoxString/ComboBoxString';
 import styles from './row.module.css';
 
+function yieldControl(_control, _marginLeft, _topOffset, _key, Component){
+    return <Component control={_control} marginLeft={_marginLeft} topOffset={_topOffset} key={_key} />
+}
+
 function generateCorrectControl(row){
     let arrayOfControlJSX = [];
 
     arrayOfControlJSX = row.controls.map((control, index) => {
         if(control.ControlType === 'LabelList'){
-            return <Label control={control} marginLeft={row.rowLeft[index]} key={index} />
+            return yieldControl(control, row.rowLeft[index], row.topOffsets[index], index, Label);
         }
         if(control.ControlType === 'TextBoxList'){
-            return <TextBox control={control} marginLeft={row.rowLeft[index]} key={index} />
+            return yieldControl(control, row.rowLeft[index], row.topOffsets[index], index, TextBox);
         }
         if(control.ControlType === 'ButtonList'){
-            return <Button control={control} marginLeft={row.rowLeft[index]} key={index} />
+            return yieldControl(control, row.rowLeft[index], row.topOffsets[index], index, Button);
         }
         if(control.ControlType === 'DateTimePickerList'){
-            return <DateTimePicker control={control} marginLeft={row.rowLeft[index]} key={index} />
+            return yieldControl(control, row.rowLeft[index], row.topOffsets[index], index, DateTimePicker);
         }
         if(control.ControlType === 'ComboBoxStringList'){
-            return <ComboBoxString control={control} marginLeft={row.rowLeft[index]}  key={index} />
+            return yieldControl(control, row.rowLeft[index], row.topOffsets[index], index, ComboBoxString);
         }
         return <div key={index} style={{marginLeft: row.rowLeft[index]+'px'}}>{control.ControlType}</div>
     });

@@ -1,11 +1,12 @@
 import React from 'react';
 
-function ComboBoxString({control, marginLeft}){
+function ComboBoxString({control, marginLeft, topOffset}){
 
     const comboBoxStringStyles = {
         fontFamily: control.Font.Name,
         fontSize: control.Font.Size+'px',
         marginLeft: marginLeft+'px',
+        marginTop: topOffset+'px',
         width: control.Size.Width+'px',
         height: control.Size.Height+'px'
     }

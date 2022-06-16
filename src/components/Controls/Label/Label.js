@@ -8,12 +8,13 @@ function getLabelWidth(control){
     return returnWidth;
 }
 
-function Label({control, marginLeft}){
+function Label({control, marginLeft, topOffset}){
 
     const labelStyles = {
         fontFamily: control.Font.Name,
         fontSize: control.Font.Size+'px',
         marginLeft: marginLeft+'px',
+        marginTop: topOffset+'px',
         width: getLabelWidth(control),
     };
 

@@ -1,5 +1,5 @@
 import {createUniqueRowPositionArray, findRowPositionBasedOnTheRowAboveThisOne, sortAnArrayOfControlsOnLocationEitherXOrY,
-    workOutWidthFromControlObject, beginANewRowSizeLeeway} from './utils';
+    workOutWidthFromControlObject, beginANewRowSizeLeeway, calculateSmallestYPositionWithinRow} from './utils';
 
 
 /**
@@ -25,7 +25,7 @@ function createAnArrayOfIndividualControlObjects(dynamicCodeGeneration){
   * @returns {Array} – Array of objects with each object representing all the rows of our React GUI.
   */
  function createRowsForPositionObject(arrayOfIndividualControlObjects){
-    const uniqueRowPositionArray = createUniqueRowPositionArray(arrayOfIndividualControlObjects);
+    const uniqueRowPositionArray = createUniqueRowPositionArray(arrayOfIndividualControlObjects); 
      const positionObjects = [];
      let sameRowObj = null; let previousRowPositionAboveThisOne = null;
      for(let i = 0; i < arrayOfIndividualControlObjects.length; i++){
@@ -65,6 +65,23 @@ function createAnArrayOfIndividualControlObjects(dynamicCodeGeneration){
     return positionObjects;
  }
 
+ /**
+  * Take the original rows array, as supplied by the 'createRowsForPositionObject' function, and modify it to calculate how much, if at all, controls sharing the same row need to be pushed down by, in relation to the control/s with the smallest Y Location within the row, for them to remain truthful to their original design as derived from the original JSON file.
+  * @param {Array} positionObjects – Array of rows, each of which containing objects manifesting controls, ordered from small to large in relation to their X axis locations, as derived from the original JSON file, now ordered in the way just described for it has just come out of the 'calculateSpacingOfControlsWithinSameRow' function.
+  * @returns {Array} – Modified Array of rows, i.e., the Array this function was supplied with, with each of its rows now having an extra 'topOffsets' property representing how much, if at all, controls need to be pushed down by for them to remain truthful to their original design as derived from the original JSON file.
+  */
+ function calculateTopOffsetOfControlsWithinSameRow(positionObjects){
+    positionObjects.forEach(row => {
+        const smallestYPositionWithinRow = calculateSmallestYPositionWithinRow(row);
+        const topOffsets = [];
+        row.controls.forEach(control => {
+            topOffsets.push(control.Location.Y - smallestYPositionWithinRow);
+        });
+        row['topOffsets'] = topOffsets;
+    });
+    return positionObjects;
+ }
+
 /**
  * Directly take in the JSON content and use it to return a new Array containing rows which jointly represent how the GUI of our web application should be structured.
  * @param {Object} dynamicCodeGeneration – The unadulterated contents straight from the original GUI config JSON file.
@@ -76,8 +93,11 @@ function positionCalculator(dynamicCodeGeneration){
     
     positionObjects = createRowsForPositionObject(arrayOfIndividualControlObjects);
     
-    //Work out how far spaced individual controls within a row should be
+    //Work out how far spaced individual controls within a row should be.
+    //Also, note, even though we are assigning 'positionObjects' to this function here (something we only do for clarity) because what it returns is simply a modified version of 'positionObjects' – the array both passed into this function as well as assigned to its return value – and because 'Arrays', the value of 'positionObjects', are reference type objects in JavaScript requiring 'deep copying' for them to be duplicated properly, we do not need to assign 'positionObjects' to this function here, for not doing it will reap exactly the same effect.
     positionObjects = calculateSpacingOfControlsWithinSameRow(positionObjects);
+
+    positionObjects = calculateTopOffsetOfControlsWithinSameRow(positionObjects);
 
     return positionObjects;
 }

@@ -71,5 +71,20 @@ function workOutWidthFromControlObject(controlObj){
     return width;
 }
 
+/**
+ * Ascertain the control/s with the smallest top offset within a row, so that controls, within the same row, with a lower top offset than this can be pushed down in relation to this value: the smallest top offset that this function is tasked with eliciting.
+ * @param {Object} row – An individual row, aka., an individual object from the Array of objects or rows (same thing) that, once ascertained and then modified appropriately from the original JSON file, determines how our web app's GUI is composed. In other words, an individual object found within the Array yielded by the 'positionCalculator' function.
+ * @returns {number} – The smallest top offset found within the given row.
+ */
+function calculateSmallestYPositionWithinRow(row){
+    let smallestYPosition = row.controls[0].Location.Y;
+    row.controls.slice(1).forEach(control => {
+        if(control.Location.Y < smallestYPosition){
+            smallestYPosition = control.Location.Y;
+        }
+    });
+    return smallestYPosition;
+}
+
 export {createUniqueRowPositionArray, findRowPositionBasedOnTheRowAboveThisOne, sortAnArrayOfControlsOnLocationEitherXOrY, workOutWidthFromControlObject,
-    beginANewRowSizeLeeway}
+    beginANewRowSizeLeeway, calculateSmallestYPositionWithinRow}
