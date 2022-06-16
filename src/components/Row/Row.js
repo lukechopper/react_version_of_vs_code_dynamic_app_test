@@ -6,6 +6,8 @@ import DateTimePicker from '../Controls/DateTimePicker/DateTimePicker';
 import ComboBoxString from '../Controls/ComboBoxString/ComboBoxString';
 import styles from './row.module.css';
 
+import {workOutSizeInRelationToRatioForWidthOrHeight} from '../../hooks/positionCalculator/utils';
+
 function yieldControl(_control, _marginLeft, _topOffset, _key, Component){
     return <Component control={_control} marginLeft={_marginLeft} topOffset={_topOffset} key={_key} />
 }
@@ -39,7 +41,7 @@ function Row({row}){
 
     return(
         <div style={{
-            marginTop: row.rowTop
+            marginTop: workOutSizeInRelationToRatioForWidthOrHeight(row.rowTop, 'height')+'px'
         }} className={styles.row}>
             {generateCorrectControl(row)}
         </div>

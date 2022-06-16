@@ -27,9 +27,10 @@ const heightScale = window.innerHeight / 489;
  * @returns {number} – the result of multiplying the given size by the determined scale factor – whether it be horizontal or vertical.
  */
 function workOutSizeInRelationToRatioForWidthOrHeight(size, dimension){
-    if(dimension !== 'width' || dimension !== 'height'){
+    if(['width','height'].indexOf(dimension) === -1){
         throw new Error("Error for 'workOutSizeInRelationToRatioForWidthOrHeight' function: second argument must either be 'width' or 'height' – both String values.");
     }
+    if(size === 0) return size;
     if(dimension === 'width'){
         return size * widthScale;
     }
@@ -95,7 +96,8 @@ function sortAnArrayOfControlsOnLocationEitherXOrY(arrayOfIndividualControlObjec
  * @returns {number} – The width from the control supplied providing that it can be ascertained, if not, then simply use 100: the default that windows forms uses for controls that do not have explicit widths set.
  */
 function workOutWidthFromControlObject(controlObj){
-    if(!controlObj['Size']) return defaultControlWidth;
+    if(controlObj['Size'] === undefined) return defaultControlWidth;
+    if(controlObj['Size']['Width'] === undefined) return defaultControlWidth;
     let width = controlObj['Size']['Width'];
     return width;
 }
@@ -116,4 +118,4 @@ function calculateSmallestYPositionWithinRow(row){
 }
 
 export {createUniqueRowPositionArray, findRowPositionBasedOnTheRowAboveThisOne, sortAnArrayOfControlsOnLocationEitherXOrY, workOutWidthFromControlObject,
-    beginANewRowSizeLeeway, calculateSmallestYPositionWithinRow, workOutSizeInRelationToRatioForWidthOrHeight}
+    beginANewRowSizeLeeway, calculateSmallestYPositionWithinRow, workOutSizeInRelationToRatioForWidthOrHeight, defaultControlWidth}

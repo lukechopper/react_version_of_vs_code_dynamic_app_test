@@ -1,5 +1,5 @@
 import {createUniqueRowPositionArray, findRowPositionBasedOnTheRowAboveThisOne, sortAnArrayOfControlsOnLocationEitherXOrY,
-    workOutWidthFromControlObject, beginANewRowSizeLeeway, calculateSmallestYPositionWithinRow, workOutSizeInRelationToRatioForWidthOrHeight} from './utils';
+    workOutWidthFromControlObject, beginANewRowSizeLeeway, calculateSmallestYPositionWithinRow} from './utils';
 
 
 /**

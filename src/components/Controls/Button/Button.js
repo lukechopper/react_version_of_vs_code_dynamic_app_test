@@ -1,14 +1,15 @@
 import React from 'react';
+import {workOutSizeInRelationToRatioForWidthOrHeight} from '../../../hooks/positionCalculator/utils';
 
 function Button({control, marginLeft, topOffset}){
 
     const buttonStyles = {
         fontFamily: control.Font.Name,
-        fontSize: control.Font.Size+'px',
-        marginLeft: marginLeft+'px',
-        marginTop: topOffset+'px',
-        width: control.Size.Width+'px',
-        height: control.Size.Height+'px',
+        fontSize: workOutSizeInRelationToRatioForWidthOrHeight(control.Font.Size, 'width')+'px',
+        marginLeft: workOutSizeInRelationToRatioForWidthOrHeight(marginLeft, 'width')+'px',
+        marginTop: workOutSizeInRelationToRatioForWidthOrHeight(topOffset, 'height')+'px',
+        width: workOutSizeInRelationToRatioForWidthOrHeight(control.Size.Width, 'width')+'px',
+        height: workOutSizeInRelationToRatioForWidthOrHeight(control.Size.Height, 'height')+'px',
         cursor: 'pointer'
     }
     

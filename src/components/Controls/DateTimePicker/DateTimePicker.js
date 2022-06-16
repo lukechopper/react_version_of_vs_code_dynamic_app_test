@@ -1,6 +1,7 @@
 import React, {useEffect, useRef} from 'react';
 import $ from 'jquery';
 import 'jquery-ui-dist/jquery-ui';
+import {workOutSizeInRelationToRatioForWidthOrHeight} from '../../../hooks/positionCalculator/utils';
 
 function DateTimePicker({control, marginLeft, topOffset}){
 
@@ -22,11 +23,11 @@ function DateTimePicker({control, marginLeft, topOffset}){
 
     const dateTimePickerStyles = {
         fontFamily: control.Font.Name,
-        fontSize: control.Font.Size+'px',
-        marginLeft: marginLeft+'px',
-        marginTop: topOffset+'px',
-        width: control.Size.Width+'px',
-        height: control.Size.Height+'px'
+        fontSize: workOutSizeInRelationToRatioForWidthOrHeight(control.Font.Size, 'width')+'px',
+        marginLeft: workOutSizeInRelationToRatioForWidthOrHeight(marginLeft, 'width')+'px',
+        marginTop: workOutSizeInRelationToRatioForWidthOrHeight(topOffset, 'height')+'px',
+        width: workOutSizeInRelationToRatioForWidthOrHeight(control.Size.Width, 'width')+'px',
+        height: workOutSizeInRelationToRatioForWidthOrHeight(control.Size.Height, 'height')+'px'
     }
 
     return(
