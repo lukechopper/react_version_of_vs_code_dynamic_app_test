@@ -10,6 +10,35 @@ const beginANewRowSizeLeeway = 5;
 const defaultControlWidth = 100;
 
 /**
+ * The ratio representing how many of the current screen width of the Visual Studio companion program to this one – currently 816 pixels – is required to reach the current width of the screen of this web application when it is maximised to fullscreen: 1920 pixels since that is the width of a standard fullscreen desktop monitor.
+ * @type {number}
+ */
+const widthScale = window.innerWidth / 816;
+/**
+ * The ratio representing how many of the current screen height of the Visual Studio companion program to this one – currently 489 pixels – is required to reach the current height of the screen of this web application when it is maximised to fullscreen: approximately 1080 pixels, for 1080 is the height of a standard fullscreen desktop monitor, but some room wall always be sifted of this due to the menus of our browser and operating system respectively.
+ * @type {number}
+ */
+const heightScale = window.innerHeight / 489;
+
+/**
+ * Takes a given quantity, whether it be representative of a size of a length, etc., and multiplies it by the determined scale factor – whether that be horizontally or vertically. In short, this is useful for scalling up the dimensions, originally intended to fit a windows form, so that, with the help of this function, they can be germane to the dimensions of a fullscreen browser window instead.
+ * @param {number} size – value that you want to be multiplied up by the windows forms to browser window scale factor – whether that be horizontally or vertically – before having this multiplied value returned by this function. 
+ * @param {String} dimension – determines whether the value you supplied for the prior argument will be multiplied by the horizontal scale factor or the vertical one.
+ * @returns {number} – the result of multiplying the given size by the determined scale factor – whether it be horizontal or vertical.
+ */
+function workOutSizeInRelationToRatioForWidthOrHeight(size, dimension){
+    if(dimension !== 'width' || dimension !== 'height'){
+        throw new Error("Error for 'workOutSizeInRelationToRatioForWidthOrHeight' function: second argument must either be 'width' or 'height' – both String values.");
+    }
+    if(dimension === 'width'){
+        return size * widthScale;
+    }
+    if(dimension === 'height'){
+        return size * heightScale;
+    }
+}
+
+/**
  * Returns an array harbouring, from small to high, the current y positions of each control.
  * @param {Array} arrayOfIndividualControlObjects – Array harbouring all of the objects manifesting each control respectively, originally from the JSON file
  * @returns {Array} – An ordered array of the unique y positions, i.e., the row position or absolute position from top, of each control from small to large.
@@ -87,4 +116,4 @@ function calculateSmallestYPositionWithinRow(row){
 }
 
 export {createUniqueRowPositionArray, findRowPositionBasedOnTheRowAboveThisOne, sortAnArrayOfControlsOnLocationEitherXOrY, workOutWidthFromControlObject,
-    beginANewRowSizeLeeway, calculateSmallestYPositionWithinRow}
+    beginANewRowSizeLeeway, calculateSmallestYPositionWithinRow, workOutSizeInRelationToRatioForWidthOrHeight}

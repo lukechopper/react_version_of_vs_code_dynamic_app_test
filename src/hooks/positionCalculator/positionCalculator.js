@@ -1,5 +1,5 @@
 import {createUniqueRowPositionArray, findRowPositionBasedOnTheRowAboveThisOne, sortAnArrayOfControlsOnLocationEitherXOrY,
-    workOutWidthFromControlObject, beginANewRowSizeLeeway, calculateSmallestYPositionWithinRow} from './utils';
+    workOutWidthFromControlObject, beginANewRowSizeLeeway, calculateSmallestYPositionWithinRow, workOutSizeInRelationToRatioForWidthOrHeight} from './utils';
 
 
 /**
@@ -92,11 +92,11 @@ function positionCalculator(dynamicCodeGeneration){
     arrayOfIndividualControlObjects = sortAnArrayOfControlsOnLocationEitherXOrY(arrayOfIndividualControlObjects, 'Y');
     
     positionObjects = createRowsForPositionObject(arrayOfIndividualControlObjects);
-    
+
     //Work out how far spaced individual controls within a row should be.
     //Also, note, even though we are assigning 'positionObjects' to this function here (something we only do for clarity) because what it returns is simply a modified version of 'positionObjects' – the array both passed into this function as well as assigned to its return value – and because 'Arrays', the value of 'positionObjects', are reference type objects in JavaScript requiring 'deep copying' for them to be duplicated properly, we do not need to assign 'positionObjects' to this function here, for not doing it will reap exactly the same effect.
     positionObjects = calculateSpacingOfControlsWithinSameRow(positionObjects);
-
+    
     positionObjects = calculateTopOffsetOfControlsWithinSameRow(positionObjects);
 
     return positionObjects;
